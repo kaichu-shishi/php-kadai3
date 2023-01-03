@@ -799,8 +799,23 @@ div.button-border-gradient {
   text-align: center;
   font-size: 2rem;
 }
+.page00__card-choice-sub {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 1.6rem;
+}
 .page00__cards {
   margin-top: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.page00__cards li {
+  display: inline-block;
+  text-align: left;
+  width: 250px;
 }
 .page00__cards span {
   font-size: 1.6rem;

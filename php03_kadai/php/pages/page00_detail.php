@@ -21,6 +21,8 @@ try {
 $stmt = $pdo->prepare("SELECT * FROM words_and_deeds_table WHERE wd_id = :wd_id;");
 $stmt->bindValue(':wd_id', $wd_id, PDO::PARAM_INT);
 $status = $stmt->execute();
+$def_cards = array('男フォルダに入れ', 'うまくいじって上下関係を築け', 'タイムコンストレインメソッド', 'Cフェーズ', '恋愛遍歴の話を引き出せ');
+$wd_cards = '';
 
 // 言動一覧用のデータ
 $stmt2 = $pdo->prepare("SELECT * FROM words_and_deeds_table;");
@@ -130,29 +132,15 @@ if ($status2==false) {
                     <input class="page00__title-area-input js-words-and-deeds-title" name="wd_title" type="text" placeholder="ここに言動のタイトルを入力してください" required="required" value="<?=$result_for_update['wd_title']?>">
                 </div>
                 <div class="page00__card-choice">
-                    <p class="page00__card-choice-heading">【使用するカード】</p>
+                    <p class="page00__card-choice-heading">【使用するカード】<span class="page00__card-choice-sub">※使用するカードを修正しない場合でも、最低1回はチェックボックス操作を行ってください<br>（でないと「修正」ボタンが有効になりません）</span></p>
                     <ul class="page00__cards">
+                        <?php foreach($def_cards as $def_card):?>
                             <!-- ※以下のdata-savekeyとidはlocalStorageを使う際につけた名残り。phpでは使用しない。 -->
                             <li>
-                                <input class="page00__card js-words-and-deeds-cards" type="checkbox" name="wd_cards[]" value="男フォルダに入れ" data-savekey="男フォルダに入れ" id="男フォルダに入れ" onchange="change()">
-                                <span>男フォルダに入れ</span>
+                                <input class="page00__card js-words-and-deeds-cards" type="checkbox" name="wd_cards[]" value="<?= $def_card ?>" data-savekey="<?= $def_card ?>" id="<?= $def_card ?>" onchange="change()" <?= in_array($def_card, $wd_cards) ? 'checked' : '' ?>>
+                                <span><?= $def_card ?></span>
                             </li>
-                            <li>
-                                <input class="page00__card js-words-and-deeds-cards" type="checkbox" name="wd_cards[]" value="うまくいじって上下関係を築け" data-savekey="うまくいじって上下関係を築け" id="うまくいじって上下関係を築け" onchange="change()">
-                                <span>うまくいじって上下関係を築け</span>
-                            </li>
-                            <li>
-                                <input class="page00__card js-words-and-deeds-cards" type="checkbox" name="wd_cards[]" value="タイムコンストレインメソッド" data-savekey="タイムコンストレインメソッド" id="タイムコンストレインメソッド" onchange="change()">
-                                <span>タイムコンストレインメソッド</span>
-                            </li>
-                            <li>
-                                <input class="page00__card js-words-and-deeds-cards" type="checkbox" name="wd_cards[]" value="Cフェーズ" data-savekey="Cフェーズ" id="Cフェーズ" onchange="change()">
-                                <span>Cフェーズ</span>
-                            </li>
-                            <li>
-                                <input class="page00__card js-words-and-deeds-cards" type="checkbox" name="wd_cards[]" value="恋愛遍歴の話を引き出せ" data-savekey="恋愛遍歴の話を引き出せ" id="恋愛遍歴の話を引き出せ" onchange="change()">
-                                <span>恋愛遍歴の話を引き出せ</span>
-                            </li>
+                        <?php endforeach; ?>
                     </ul>
                 </div>           
                 <div class="page00__entry">

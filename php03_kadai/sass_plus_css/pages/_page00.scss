@@ -237,9 +237,24 @@
             text-align: center;
             @include r.font-size(20);
         }
+        &-sub {
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            @include r.font-size(16);
+        }
     }
     &__cards {
         margin-top: 10px;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        & li {
+            display: inline-block;
+            text-align: left;
+            width: 250px;
+        }
         & span {
             @include r.font-size(16);
         }
