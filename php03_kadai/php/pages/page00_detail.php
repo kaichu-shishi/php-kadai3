@@ -40,7 +40,6 @@ if ($status === false) {
     //データが取得できた場合の処理
     $result_for_update = $stmt->fetch();
     $wd_cards = explode(',', $result_for_update['wd_cards']);
-    var_dump($wd_cards);
 }
 
 // 言動一覧用のデータ
